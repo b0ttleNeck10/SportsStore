@@ -4,7 +4,7 @@ namespace SportsStore.Models
 {
     public class Product
     {
-        public long? ProductId { get; set; }
+        public long? ProductID { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         [Column(TypeName = "decimal(8, 2)")]

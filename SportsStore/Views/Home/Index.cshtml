@@ -5,10 +5,8 @@
 @foreach (var product in Model.Products ?? Enumerable.Empty<Product>())
 {
 	<div>
-		<h4>Name: @product.Name</h4>
-		<p>Description: @product.Description</p>
-		<p>Price: @product.Price.ToString("c")</p>
+		@await Html.PartialAsync("ProductSummary", product)
 	</div>
 }
 
-<div page-model="@Model.PagingInfo" page-action="Index"></div>
+<div page-model="@Model.PagingInfo" page-action="Index" page-class-selected="btn primary" page-url-category=@Model.CurrentCategory></div>
