@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Formats.Asn1;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -25,6 +26,10 @@ namespace SportsStore.Infrastructure
 
         public string? PageAction { get; set; }
 
+        public string PageClass { get; set; }
+        public string PageClassNormal { get; set; }
+        public string PageClassSelected { get; set; }
+
         [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
         public Dictionary<string, object> PageUrlValues { get; set; }
             = new Dictionary<string, object>();
@@ -40,6 +45,17 @@ namespace SportsStore.Infrastructure
                     TagBuilder tag = new TagBuilder("a");
                     PageUrlValues["productPage"] = i;
                     tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
+                    string classes = PageClass;
+                    if (i == PageModel.CurrentPage)
+                    {
+                        classes += " " + PageClassSelected;
+                    }
+                    else
+                    {
+                        classes += " " + PageClassNormal;
+                    }
+
+                    tag.AddCssClass(classes);
                     tag.InnerHtml.Append(i.ToString());
                     result.InnerHtml.AppendHtml(tag);
                 }

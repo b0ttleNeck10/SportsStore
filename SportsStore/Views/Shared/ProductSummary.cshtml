@@ -1,21 +1,24 @@
 ﻿@model Product
 
 <div>
-	<div>
-		<h4>
-			@Model.Name
-			<span>
-				<small>@Model.Price.ToString("c")</small>
-			</span>
-		</h4>
+	<div class="flex flex-row">
+		<div>
+			<img src="../images/general-img-portrait.png" style="height: 183px; width: 155px;" />
+		</div>
+		<div class="pl-2 w-full">
+			<div class="flex flex-column justify-between h-100">
+				<div class="">
+					<p class="text-xl mb-2">@Model.Name</p>
+					<p class="text-base">@Model.Description</p>
+				</div>				<div class="flex flex-row justify-between">
+					<p class="text-base text-red-900">@Model.Price.ToString("c")</p>
+					<form id="@Model.ProductID" asp-page="/Cart" method="post">
+						<input type="hidden" asp-for="ProductID" />
+						<input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+						<button class="rounded-2 py-1 px-2 border border-gray-300 hover:bg-gray-700 hover:text-white " type="submit">Add to Cart</button>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
-
-	<form id="@Model.ProductID" asp-page="/Cart" method="post">
-		<input type="hidden" asp-for="ProductID"/>
-		<input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()"/>
-		<span>
-			@Model.Description
-			<button type="submit">Add to Cart</button>
-		</span>
-	</form>
 </div>

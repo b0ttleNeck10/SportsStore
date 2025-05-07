@@ -1,12 +1,20 @@
 ﻿@model ProductsListViewModel
 
-<h1>Welcome to Sports Store</h1>
+<p class="text-4xl mb-2 font-bold">Welcome to Sports Store</p>
 
-@foreach (var product in Model.Products ?? Enumerable.Empty<Product>())
-{
-	<div>
-		@await Html.PartialAsync("ProductSummary", product)
+<div class="flex justify-center mb-2">
+	<p class="text-3xl font-medium">@Model.CurrentCategory</p>
+</div>
+
+<div class="min-h-[50vh] max-h-[75vh] overflow-auto">
+	<div class="grid grid-cols-2 gap-4">
+		@foreach (var product in Model.Products ?? Enumerable.Empty<Product>())
+		{
+			<div class="rounded-2 p-2 border border-gray-600">
+				@await Html.PartialAsync("ProductSummary", product)
+			</div>
+		}
 	</div>
-}
+</div>
 
-<div page-model="@Model.PagingInfo" page-action="Index" page-class-selected="btn primary" page-url-category=@Model.CurrentCategory></div>
+<div page-model="@Model.PagingInfo" page-action="Index" page-class="py-1 px-2" page-class-normal="py-1 px-2" page-class-selected="bg-gray-700 text-white py-1 px-2 rounded" class="text-center" page-url-category=@Model.CurrentCategory></div>

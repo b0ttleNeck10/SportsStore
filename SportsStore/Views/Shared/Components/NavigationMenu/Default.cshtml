@@ -1,9 +1,18 @@
 ﻿@model IEnumerable<string>
 
-<div>
-	<a asp-action="Index" asp-controller="Home" asp-route-category="">Home</a>
+<div class="flex flex-col gap-2">
 	@foreach (string category in Model ?? Enumerable.Empty<string>())
 	{
-		<a class="btn @(category == ViewBag.SelectedCategory ? "btn-primary" : "btn-outline-secondary")" asp-action="Index" asp-controller="Home" asp-route-category="@category" asp-route-productPage="1">@category</a>
+		var isSelected = category == ViewBag.SelectedCategory;
+		var hoverClass = isSelected ? "" : "hover:bg-gray-200";
+		var bgClass = isSelected ? "bg-gray-700 text-white" : "btn-outline-secondary";
+
+		<a class="rounded-2 font-medium text-gray-900 py-2.5 px-4 @hoverClass @bgClass"
+		   asp-action="Index"
+		   asp-controller="Home"
+		   asp-route-category="@category"
+		   asp-route-productPage="1">
+			@category
+		</a>
 	}
 </div>

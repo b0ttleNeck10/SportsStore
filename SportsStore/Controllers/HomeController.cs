@@ -18,7 +18,7 @@ namespace SportsStore.Controllers
             => View(new ProductsListViewModel
             {
                 Products = repository.Products
-                    .Where(p => p.Category == null || p.Category == category)
+                    .Where(p => string.IsNullOrEmpty(category) || p.Category == category)
                     .OrderBy(p => p.ProductID)
                     .Skip((ProductPage - 1) * PageSize)
                     .Take(PageSize),
