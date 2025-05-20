@@ -14,3 +14,7 @@
 3. Unzip the downloaded ZIP file
 4. Open the SportsSln.sln (the solution)
 5. Run the project
+
+Members: (Who contributed)
+1. Dexter Lauron
+2. James Racal
